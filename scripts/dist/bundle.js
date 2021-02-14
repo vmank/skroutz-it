@@ -5,7 +5,7 @@ class SearchWindow extends HTMLElement {
 
     connectedCallback() {
         let query = this.getAttribute( 'query' );
-        let icon = chrome.runtime.getURL( "assets/icons/logo.png" );
+        let icon = chrome.runtime.getURL( 'assets/icons/logo.png' );
 
         this.className = "";
         this.innerHTML = `
@@ -13,7 +13,10 @@ class SearchWindow extends HTMLElement {
                 <div class="header">
                     <img class="logo" src='${ icon }'>
                     <h1 class="title"> You are searching for: ${ query } </h1>
-                    <a class="close"></a>
+                    <div class="buttons-container">
+                        <a class="minimize"></a>
+                        <a class="close"></a>
+                    </div>
                 </div>
                 <div class="content">
                 </div>
@@ -24,15 +27,20 @@ class SearchWindow extends HTMLElement {
             e.target.className;
 
 
-            if( "close" ) {
+            if( 'close' ) {
                 e.target.closest("search-window").remove();
             }
         } );
 
 
-        let shadowRoot = this.querySelector('.content').attachShadow({mode: 'open'});
-        shadowRoot.innerHTML = "";
+
+        let shadowRoot = this.querySelector( '.content' ).attachShadow( {mode: 'open'} );
+        let searchIframe = document.createElement( 'iframe' );
+        shadowRoot.appendChild( searchIframe );
+        searchIframe.setAttribute( 'src', `https://www.skroutz.gr/search?keyphrase=${ query.replace( /\s/g, '' ) }` );
+
     }
+
 
 }
 
