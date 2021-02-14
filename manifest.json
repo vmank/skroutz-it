@@ -1,0 +1,32 @@
+{
+
+    "manifest_version": 2,
+    "name": "__MSG_extensionName__",
+    "description": "__MSG_extensionDescription__",
+    "default_locale": "en",
+    "version": "0.1",
+
+    "author": "vmank",
+    "homepage_url": "https://github.com/vmank/skroutzit",
+
+    "icons": {
+      "48": "assets/icons/skroutz-hat-48.png"
+    },
+
+    "background": {
+      "scripts": ["scripts/dist/background.js"]
+    },
+
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["scripts/dist/bundle.js"]
+      }
+    ],
+
+    "permissions": [
+      "tabs",
+      "contextMenus"
+    ]
+
+  }
