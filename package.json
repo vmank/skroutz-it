@@ -1,0 +1,26 @@
+{
+  "name": "skroutzit",
+  "version": "1.0.0",
+  "description": "A Firefox add-on for a convenient way to search and compare products on Skroutz",
+  "main": "rollup.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vmank/skroutzit.git"
+  },
+  "keywords": [
+    "web-extension"
+  ],
+  "author": "vmank",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/vmank/skroutzit/issues"
+  },
+  "homepage": "https://github.com/vmank/skroutzit#readme",
+  "devDependencies": {
+    "rollup": "^2.39.0",
+    "rollup-plugin-scss": "^2.6.1"
+  }
+}

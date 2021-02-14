@@ -10,7 +10,7 @@
     "homepage_url": "https://github.com/vmank/skroutzit",
 
     "icons": {
-      "48": "assets/icons/skroutz-hat-48.png"
+      "48": "assets/icons/logo.png"
     },
 
     "background": {
@@ -20,13 +20,18 @@
     "content_scripts": [
       {
         "matches": ["<all_urls>"],
-        "js": ["scripts/dist/bundle.js"]
+        "js": ["scripts/dist/bundle.js"],
+        "css": ["assets/css/main.css"]
       }
     ],
 
     "permissions": [
       "tabs",
       "contextMenus"
+    ],
+
+    "web_accessible_resources": [
+      "assets/icons/logo.png"
     ]
 
   }
