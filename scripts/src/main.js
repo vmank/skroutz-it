@@ -1,10 +1,10 @@
-import SearchWindow from './SearchWindow.js'; // Or it could be simply `hello.js`
+import SearchWindow from './SearchWindow.js';
 import '../../assets/scss/main.scss'
 
 window.customElements.define( 'search-window', SearchWindow );
 
 
-chrome.runtime.onMessage.addListener(
+browser.runtime.onMessage.addListener(
     (request, sender, sendResponse) => {
         if ( request.query != "" ) {
             let e = document.createElement('search-window');

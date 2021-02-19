@@ -9,7 +9,7 @@ export default class SearchWindow extends HTMLElement {
 
     connectedCallback() {
         let query = this.getAttribute( 'query' );
-        let icon = chrome.runtime.getURL( 'assets/icons/logo.png' )
+        let icon = browser.runtime.getURL( 'assets/icons/logo.png' )
 
         this.className = "";
         this.innerHTML = `
@@ -30,17 +30,27 @@ export default class SearchWindow extends HTMLElement {
         this.addEventListener( 'click', (e) => {
             let targetElementClass = e.target.className;
 
-
-            if( targetElementClass = 'close' ) {
-                e.target.closest("search-window").remove();
+            switch (targetElementClass) {
+                case 'close':
+                    e.target.closest("search-window").remove();
+                    break;
+                case 'minimize':
+                    console.log('minimize');
+                    break;
+                default:
+                    console.log('default');
             }
         } );
 
 
 
         let shadowRoot = this.querySelector( '.content' ).attachShadow( {mode: 'open'} );
+
         let searchIframe = document.createElement( 'iframe' );
+
         shadowRoot.appendChild( searchIframe );
+
+        searchIframe.setAttribute( 'name', 'skroutz-search' );
         searchIframe.setAttribute( 'src', `https://www.skroutz.gr/search?keyphrase=${ query.replace( /\s/g, '' ) }` );
 
     }

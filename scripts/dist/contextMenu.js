@@ -5,7 +5,8 @@ browser.contextMenus.create( {
     contexts: ["selection"]
 } );
 
-// Event Listener
+
+// Context menu onClicked listener
 browser.contextMenus.onClicked.addListener( (info, tab) => {
     if (info.menuItemId = "skroutz-search") {
         sendMessageToTab(tab, info);
@@ -13,9 +14,8 @@ browser.contextMenus.onClicked.addListener( (info, tab) => {
 } );
 
 
-
 function sendMessageToTab(tab, info) {
-    chrome.tabs.sendMessage(
+    browser.tabs.sendMessage(
         tab.id,
         { query: info.selectionText }
     );

@@ -35,8 +35,12 @@ class SearchWindow extends HTMLElement {
 
 
         let shadowRoot = this.querySelector( '.content' ).attachShadow( {mode: 'open'} );
+
         let searchIframe = document.createElement( 'iframe' );
+
         shadowRoot.appendChild( searchIframe );
+
+        searchIframe.setAttribute( 'name', 'skroutz-search' );
         searchIframe.setAttribute( 'src', `https://www.skroutz.gr/search?keyphrase=${ query.replace( /\s/g, '' ) }` );
 
     }
@@ -58,4 +62,14 @@ chrome.runtime.onMessage.addListener(
             document.body.appendChild( e );
         }
     }
+);
+
+browser.webRequest.onHeadersReceived.addListener( (details) => {
+	let newHeaders = details.responseHeaders.filter(
+		header => !header.name.toLowerCase().endsWith('frame-options')
+	);
+	return {responseHeaders: newHeaders};
+	},
+	{ urls: ['<all_urls>'], types: ['sub_frame'] },
+	['blocking', 'responseHeaders']
 );
