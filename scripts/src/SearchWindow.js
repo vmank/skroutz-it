@@ -15,7 +15,7 @@ export default class SearchWindow extends HTMLElement {
         this.innerHTML = `
             <div class="wrapper">
                 <div class="header">
-                    <img class="logo" src='${ icon }'>
+                    <img class="logo" src='${ icon }' draggable="false">
                     <h1 class="title"> You are searching for: ${ query } </h1>
                     <div class="buttons-container">
                         <a class="minimize"></a>
@@ -27,7 +27,8 @@ export default class SearchWindow extends HTMLElement {
             </div>
         `;
 
-        this.addEventListener( 'click', (e) => {
+
+        this.addEventListener( 'click', e => {
             let targetElementClass = e.target.className;
 
             switch (targetElementClass) {
@@ -38,6 +39,41 @@ export default class SearchWindow extends HTMLElement {
                     console.log('minimize');
                     break;
             }
+        } );
+
+
+        this.addEventListener( 'mousedown', e => {
+            let cursorFromTargetX = e.layerX;
+            let cursorFromTargetY = e.layerY;
+
+            let originalTarget = e.originalTarget.className;
+            let targetParentNode = e.target.parentNode.className;
+
+            let mouseUp = false;
+            let mouseUpToggle = () => { mouseUp = !mouseUp };
+
+            console.log( e );
+
+            // On mousemove
+            this.addEventListener( 'mousemove', e => {
+
+                // While user is holding click
+                if ( !mouseUp ) {
+                    if( originalTarget == 'header' || targetParentNode == 'header' ) {
+                        let cursorFromWindowX = e.pageX;
+                        let cursorFromWindowY = e.pageY;
+
+                        this.style.left = `${cursorFromWindowX - cursorFromTargetX}px`;
+                        this.style.top = `${cursorFromWindowY - cursorFromTargetY}px`;
+                    }
+                } else {
+                    this.removeEventListener( 'mouseup', mouseUpToggle );
+                }
+            } );
+
+
+            this.addEventListener( 'mouseup', mouseUpToggle )
+
         } );
 
 

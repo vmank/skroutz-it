@@ -13,6 +13,12 @@ search-window {
     * {
         font-family: 'Roboto Condensed';
         font-weight: bold;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
 
     .wrapper {
@@ -30,6 +36,7 @@ search-window {
 
             .logo {
                 width: 20px;
+                pointer-events: none;
             }
 
             .title {
