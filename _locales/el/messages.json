@@ -1,0 +1,13 @@
+{
+
+    "extensionName": {
+      "message": "SkroutzIt",
+      "description": "Name of the extension."
+    },
+
+    "extensionDescription": {
+      "message": "A Firefox add-on for a convenient way to search and compare products on Skroutz",
+      "description": "Description of the extension."
+    }
+
+  }

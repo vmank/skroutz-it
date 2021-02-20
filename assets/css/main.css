@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap");
+search-window {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 350px; }
+  search-window * {
+    font-family: 'Roboto Condensed';
+    font-weight: bold;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
+  search-window .wrapper {
+    border: 2px solid #e2e2e2;
+    border-radius: 5px;
+    background-color: #f5f2f0; }
+    search-window .wrapper .header {
+      align-items: center;
+      background: #f5f2f0;
+      border-bottom: 1px solid #e2e2e2;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 15px; }
+      search-window .wrapper .header .logo {
+        width: 20px;
+        pointer-events: none; }
+      search-window .wrapper .header .title {
+        color: #000;
+        border-bottom: unset;
+        font-size: 14px;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        line-height: 15px; }
+      search-window .wrapper .header .buttons-container {
+        width: 40px;
+        height: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between; }
+        search-window .wrapper .header .buttons-container .minimize {
+          display: block;
+          width: 15px;
+          height: 15px;
+          position: relative; }
+          search-window .wrapper .header .buttons-container .minimize:hover {
+            opacity: 1; }
+          search-window .wrapper .header .buttons-container .minimize:before {
+            position: absolute;
+            left: 7px;
+            content: ' ';
+            height: 15px;
+            width: 2px;
+            background-color: #333; }
+          search-window .wrapper .header .buttons-container .minimize:before {
+            transform: rotate(90deg); }
+        search-window .wrapper .header .buttons-container .close {
+          display: block;
+          width: 15px;
+          height: 15px;
+          position: relative; }
+          search-window .wrapper .header .buttons-container .close:hover {
+            opacity: 1; }
+          search-window .wrapper .header .buttons-container .close:after, search-window .wrapper .header .buttons-container .close:before {
+            position: absolute;
+            left: 7px;
+            content: ' ';
+            height: 15px;
+            width: 2px;
+            background-color: #333; }
+          search-window .wrapper .header .buttons-container .close:before {
+            transform: rotate(45deg); }
+          search-window .wrapper .header .buttons-container .close:after {
+            transform: rotate(-45deg); }
