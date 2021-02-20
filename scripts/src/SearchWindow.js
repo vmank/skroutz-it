@@ -37,8 +37,6 @@ export default class SearchWindow extends HTMLElement {
                 case 'minimize':
                     console.log('minimize');
                     break;
-                default:
-                    console.log('default');
             }
         } );
 
@@ -46,12 +44,23 @@ export default class SearchWindow extends HTMLElement {
 
         let shadowRoot = this.querySelector( '.content' ).attachShadow( {mode: 'open'} );
 
+        let searchIframeStyles = document.createElement( 'style' );
+
+        searchIframeStyles.textContent = `
+            iframe {
+                border: unset;
+                width: 100%;
+            }
+        `;
+
+
         let searchIframe = document.createElement( 'iframe' );
 
+        shadowRoot.appendChild( searchIframeStyles );
         shadowRoot.appendChild( searchIframe );
 
         searchIframe.setAttribute( 'name', 'skroutz-search' );
-        searchIframe.setAttribute( 'src', `https://www.skroutz.gr/search?keyphrase=${ query.replace( /\s/g, '' ) }` );
+        searchIframe.setAttribute( 'src', `https://www.skroutz.gr/search?keyphrase=${ query.replace( /\s/g, '' ) }#sku-list` );
 
     }
 

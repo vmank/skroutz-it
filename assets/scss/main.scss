@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
 
+$gray: #333;
+$bg-gray: #f5f2f0;
+$border-gray: #dad0d0;
 
 search-window {
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 300px;
+    width: 350px;
 
     * {
         font-family: 'Roboto Condensed';
@@ -13,11 +16,14 @@ search-window {
     }
 
     .wrapper {
+        border: 3px solid $border-gray;
+        border-radius: 5px;
+        background-color: $bg-gray;
 
         .header {
             align-items: center;
-            background: #f5f2f0;
-            border-radius: 10px;
+            background: $bg-gray;
+            border-bottom: 1px solid $border-gray;
             display: flex;
             justify-content: space-between;
             padding: 10px 15px;
@@ -58,7 +64,7 @@ search-window {
                         content: ' ';
                         height: 15px;
                         width: 2px;
-                        background-color: #333;
+                        background-color: $gray;
                     }
 
                     &:before {
@@ -83,7 +89,7 @@ search-window {
                         content: ' ';
                         height: 15px;
                         width: 2px;
-                        background-color: #333;
+                        background-color: $gray;
                     }
 
                     &:before {
@@ -97,5 +103,4 @@ search-window {
             }
         }
     }
-
 }

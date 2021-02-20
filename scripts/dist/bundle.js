@@ -5,7 +5,7 @@ class SearchWindow extends HTMLElement {
 
     connectedCallback() {
         let query = this.getAttribute( 'query' );
-        let icon = chrome.runtime.getURL( 'assets/icons/logo.png' );
+        let icon = browser.runtime.getURL( 'assets/icons/logo.png' );
 
         this.className = "";
         this.innerHTML = `
@@ -24,11 +24,15 @@ class SearchWindow extends HTMLElement {
         `;
 
         this.addEventListener( 'click', (e) => {
-            e.target.className;
+            let targetElementClass = e.target.className;
 
-
-            if( 'close' ) {
-                e.target.closest("search-window").remove();
+            switch (targetElementClass) {
+                case 'close':
+                    e.target.closest("search-window").remove();
+                    break;
+                case 'minimize':
+                    console.log('minimize');
+                    break;
             }
         } );
 
@@ -36,12 +40,23 @@ class SearchWindow extends HTMLElement {
 
         let shadowRoot = this.querySelector( '.content' ).attachShadow( {mode: 'open'} );
 
+        let searchIframeStyles = document.createElement( 'style' );
+
+        searchIframeStyles.textContent = `
+            iframe {
+                border: unset;
+                width: 100%;
+            }
+        `;
+
+
         let searchIframe = document.createElement( 'iframe' );
 
+        shadowRoot.appendChild( searchIframeStyles );
         shadowRoot.appendChild( searchIframe );
 
         searchIframe.setAttribute( 'name', 'skroutz-search' );
-        searchIframe.setAttribute( 'src', `https://www.skroutz.gr/search?keyphrase=${ query.replace( /\s/g, '' ) }` );
+        searchIframe.setAttribute( 'src', `https://www.skroutz.gr/search?keyphrase=${ query.replace( /\s/g, '' ) }#sku-list` );
 
     }
 
@@ -51,7 +66,7 @@ class SearchWindow extends HTMLElement {
 window.customElements.define( 'search-window', SearchWindow );
 
 
-chrome.runtime.onMessage.addListener(
+browser.runtime.onMessage.addListener(
     (request, sender, sendResponse) => {
         if ( request.query != "" ) {
             let e = document.createElement('search-window');
@@ -62,14 +77,4 @@ chrome.runtime.onMessage.addListener(
             document.body.appendChild( e );
         }
     }
-);
-
-browser.webRequest.onHeadersReceived.addListener( (details) => {
-	let newHeaders = details.responseHeaders.filter(
-		header => !header.name.toLowerCase().endsWith('frame-options')
-	);
-	return {responseHeaders: newHeaders};
-	},
-	{ urls: ['<all_urls>'], types: ['sub_frame'] },
-	['blocking', 'responseHeaders']
 );
