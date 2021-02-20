@@ -2,7 +2,7 @@
 
 $gray: #333;
 $bg-gray: #f5f2f0;
-$border-gray: #dad0d0;
+$border-gray: #e2e2e2;
 
 search-window {
     position: fixed;
@@ -16,7 +16,7 @@ search-window {
     }
 
     .wrapper {
-        border: 3px solid $border-gray;
+        border: 2px solid $border-gray;
         border-radius: 5px;
         background-color: $bg-gray;
 
