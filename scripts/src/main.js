@@ -1,8 +1,6 @@
 import SearchWindow from './SearchWindow.js';
 import '../../assets/scss/main.scss'
 
-window.customElements.define( 'search-window', SearchWindow );
-
 
 browser.runtime.onMessage.addListener(
     (request, sender, sendResponse) => {

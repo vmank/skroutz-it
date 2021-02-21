@@ -51,7 +51,6 @@ class SearchWindow extends HTMLElement {
 
         let mouseUpToggle = () => {
             mouseUp = !mouseUp;
-            console.log( mouseUp );
         };
 
 
@@ -74,7 +73,9 @@ class SearchWindow extends HTMLElement {
             // console.log( mouseUp );
             // While user is holding click
             if ( !mouseUp ) {
+                // console.log( `mousedown: ${!mouseUp}` );
                 if( movementState.targetIsHeader ) {
+                    // console.log( `isheader: ${movementState.targetIsHeader}` );
                     this.style.left = `${e.clientX - movementState.position.x}px`;
                     this.style.top = `${e.clientY - movementState.position.y}px`;
                 }
@@ -82,9 +83,14 @@ class SearchWindow extends HTMLElement {
         };
 
 
-
+        // Capture mousedown only on search-window
         this.addEventListener( 'mousedown', onMouseDown );
+
+        // Capture mousemove on body for smooth movement
         document.body.addEventListener( 'mousemove', onMouseMove );
+
+        // Capture mouseup on body to ensure that if a user
+        // releases the MB1-2 the search-window will stop moving
         document.body.addEventListener( 'mouseup', e => {
             if( mouseUp == false ) {
                 mouseUpToggle();
@@ -118,8 +124,7 @@ class SearchWindow extends HTMLElement {
 
 }
 
-window.customElements.define( 'search-window', SearchWindow );
-
+customElements.define( 'search-window', SearchWindow );
 
 browser.runtime.onMessage.addListener(
     (request, sender, sendResponse) => {
