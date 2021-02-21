@@ -1,10 +1,6 @@
 export default class SearchWindow extends HTMLElement {
     constructor() {
         super();
-
-        // var shadowRoot = this.attachShadow({mode: 'open'});
-        // shadowRoot.innerHTML = `<strong>Shadow dom super powers for the win!</strong>`;
-        let counter = 0;
     }
 
     connectedCallback() {
@@ -42,42 +38,67 @@ export default class SearchWindow extends HTMLElement {
         } );
 
 
-        this.addEventListener( 'mousedown', e => {
-            let cursorFromTargetX = e.layerX;
-            let cursorFromTargetY = e.layerY;
+        let mouseUp = true;
+
+        let movementState = {
+            targetIsHeader: false,
+            position: {
+                x: 0,
+                y: 0
+            }
+        }
+
+
+        let mouseUpToggle = () => {
+            mouseUp = !mouseUp;
+        }
+
+
+        let onMouseDown = e => {
+            if( mouseUp == true ) {
+                mouseUpToggle();
+            }
 
             let originalTarget = e.originalTarget.className;
             let targetParentNode = e.target.parentNode.className;
 
-            let mouseUp = false;
-            let mouseUpToggle = () => { mouseUp = !mouseUp };
+            movementState.targetIsHeader = originalTarget == 'header' || targetParentNode == 'header';
 
-            console.log( e );
+            movementState.position.x = Math.abs(this.offsetLeft - e.clientX);
+            movementState.position.y = Math.abs(this.offsetTop - e.clientY);
+        }
 
-            // On mousemove
-            this.addEventListener( 'mousemove', e => {
 
-                // While user is holding click
-                if ( !mouseUp ) {
-                    if( originalTarget == 'header' || targetParentNode == 'header' ) {
-                        let cursorFromWindowX = e.pageX;
-                        let cursorFromWindowY = e.pageY;
-
-                        this.style.left = `${cursorFromWindowX - cursorFromTargetX}px`;
-                        this.style.top = `${cursorFromWindowY - cursorFromTargetY}px`;
-                    }
-                } else {
-                    this.removeEventListener( 'mouseup', mouseUpToggle );
+        let onMouseMove = e => {
+            // console.log( mouseUp );
+            // While user is holding click
+            if ( !mouseUp ) {
+                // console.log( `mousedown: ${!mouseUp}` );
+                if( movementState.targetIsHeader ) {
+                    // console.log( `isheader: ${movementState.targetIsHeader}` );
+                    this.style.left = `${e.clientX - movementState.position.x}px`;
+                    this.style.top = `${e.clientY - movementState.position.y}px`;
                 }
-            } );
+            }
+        }
 
 
-            this.addEventListener( 'mouseup', mouseUpToggle )
+        // Capture mousedown only on search-window
+        this.addEventListener( 'mousedown', onMouseDown );
 
-        } );
+        // Capture mousemove on body for smooth movement
+        document.body.addEventListener( 'mousemove', onMouseMove );
+
+        // Capture mouseup on body to ensure that if a user
+        // releases the MB1-2 the search-window will stop moving
+        document.body.addEventListener( 'mouseup', e => {
+            if( mouseUp == false ) {
+                mouseUpToggle();
+            }
+        });
 
 
-
+        // Attach Shadow DOM
         let shadowRoot = this.querySelector( '.content' ).attachShadow( {mode: 'open'} );
 
         let searchIframeStyles = document.createElement( 'style' );
@@ -103,3 +124,4 @@ export default class SearchWindow extends HTMLElement {
 
 }
 
+customElements.define( 'search-window', SearchWindow );
