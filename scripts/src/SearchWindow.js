@@ -120,10 +120,7 @@ export default class SearchWindow extends HTMLElement {
 
         searchIframe.setAttribute( 'name', 'skroutz-search' );
         searchIframe.setAttribute( 'src', `https://www.skroutz.gr/search?keyphrase=${ query.replace( /\s/g, '' ) }#sku-list` );
-
     }
-
-
 }
 
 customElements.define( 'search-window', SearchWindow );
