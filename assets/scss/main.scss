@@ -8,7 +8,7 @@ search-window {
     position: fixed;
     top: 0;
     left: 0;
-    width: 350px;
+    width: max-content;
 
     * {
         font-family: 'Roboto Condensed';
@@ -25,6 +25,9 @@ search-window {
         border: 2px solid $border-gray;
         border-radius: 5px;
         background-color: $bg-gray;
+        padding-bottom: 13px;
+        resize: both;
+        overflow: hidden;
 
         .header {
             align-items: center;
@@ -49,35 +52,10 @@ search-window {
             }
 
             .buttons-container {
-                width: 40px;
+                width: 15px;
                 height: 15px;
                 display: flex;
                 align-items: center;
-                justify-content: space-between;
-
-                .minimize {
-                    display: block;
-                    width: 15px;
-                    height: 15px;
-                    position: relative;
-
-                    &:hover {
-                        opacity: 1;
-                    }
-
-                    &:before {
-                        position: absolute;
-                        left: 7px;
-                        content: ' ';
-                        height: 15px;
-                        width: 2px;
-                        background-color: $gray;
-                    }
-
-                    &:before {
-                        transform: rotate(90deg);
-                    }
-                }
 
                 .close {
                     display: block;
@@ -109,5 +87,21 @@ search-window {
                 }
             }
         }
+
+        .content {
+            height: 100%;
+        }
+
+        // .resize {
+        //     background: url('../icons/resize_icon.svg');
+        //     background-repeat: no-repeat;
+        //     bottom: 2px;
+        //     cursor: nw-resize;
+        //     height: 10px;
+        //     right: 2px;
+        //     position: absolute;
+        //     width: 10px;
+        //     z-index: 1000;
+        // }
     }
 }

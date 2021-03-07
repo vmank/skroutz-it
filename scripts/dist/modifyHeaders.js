@@ -1,6 +1,6 @@
 var extraInfoSpec = ['blocking', 'responseHeaders'];
 var filter = {
-    urls: ['<all_urls>']
+    urls: ['https://www.skroutz.gr/*']
 };
 
 // Bypass X-Frame-Options
