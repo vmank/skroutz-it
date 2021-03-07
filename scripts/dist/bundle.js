@@ -54,8 +54,10 @@ class SearchWindow extends HTMLElement {
         };
 
 
-        let onMouseDown = e => {
-            if( mouseUp == true ) {
+        let onMouseDown = (e) => {
+            movementState.targetIsHeader = false;
+
+            if( mouseUp ) {
                 mouseUpToggle();
             }
 
@@ -64,18 +66,17 @@ class SearchWindow extends HTMLElement {
 
             movementState.targetIsHeader = originalTarget == 'header' || targetParentNode == 'header';
 
-            movementState.position.x = Math.abs(this.offsetLeft - e.clientX);
-            movementState.position.y = Math.abs(this.offsetTop - e.clientY);
+            if( movementState.targetIsHeader ) {
+                movementState.position.x = Math.abs(this.offsetLeft - e.clientX);
+                movementState.position.y = Math.abs(this.offsetTop - e.clientY);
+            }
         };
 
 
-        let onMouseMove = e => {
-            // console.log( mouseUp );
+        let onMouseMove = (e) => {
             // While user is holding click
             if ( !mouseUp ) {
-                // console.log( `mousedown: ${!mouseUp}` );
                 if( movementState.targetIsHeader ) {
-                    // console.log( `isheader: ${movementState.targetIsHeader}` );
                     this.style.left = `${e.clientX - movementState.position.x}px`;
                     this.style.top = `${e.clientY - movementState.position.y}px`;
                 }
@@ -106,6 +107,7 @@ class SearchWindow extends HTMLElement {
         searchIframeStyles.textContent = `
             iframe {
                 border: unset;
+                height: 100%;
                 width: 100%;
             }
         `;
