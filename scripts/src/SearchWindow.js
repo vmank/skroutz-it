@@ -5,7 +5,7 @@ export default class SearchWindow extends HTMLElement {
 
     connectedCallback() {
         let query = this.getAttribute( 'query' );
-        let icon = browser.runtime.getURL( 'assets/icons/logo.png' )
+        let icon = browser.runtime.getURL( 'assets/icons/search_window_logo.png' )
 
         this.className = "";
         this.innerHTML = `

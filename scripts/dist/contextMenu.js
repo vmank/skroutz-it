@@ -1,7 +1,7 @@
 // Create ContextMenu
 browser.contextMenus.create( {
     id: "skroutz-search",
-    title: "SkroutzIt",
+    title: "Search on Skroutz.gr",
     contexts: ["selection"]
 } );
 

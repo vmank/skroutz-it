@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/vmank/skroutzit#readme",
   "devDependencies": {
-    "rollup": "^2.39.0",
-    "rollup-plugin-scss": "^2.6.1"
+    "node-sass": "^7.0.1",
+    "rollup": "^2.77.2",
+    "rollup-plugin-scss": "^3.0.0"
   }
 }
