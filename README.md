@@ -1,5 +1,5 @@
 # SkroutzIt
-A Firefox add-on for a convenient way to search and compare products on Skroutz
+A Firefox add-on for a convenient way to search and compare products on Skroutz(https://skroutz.gr)
 
 
 **Release v1.01**
